@@ -49,28 +49,31 @@ export default function Header() {
     return (
         <div className="flex flex-col p-3">
             {
-                isEditing ? 
-                    <ButtonActions>
-                        <Button
-                            buttonType="save"
-                            buttonText="Save"
-                            clickHandler={handleSave}
-                        />
-
-                        <Button
-                            buttonType="cancel"
-                            buttonText="Cancel"
-                            clickHandler={handleCancel}
-                        />
-                    </ButtonActions>
-                : 
-                    <ButtonActions>
+                isEditing ?
+                    <div className="flex justify-end">
+                        <ButtonActions>
                             <Button
-                                buttonType="edit"
-                                buttonText="Edit"
-                                clickHandler={handleEditingStateChange}
+                                buttonType="save"
+                                buttonText="Save"
+                                clickHandler={handleSave}
                             />
-                    </ButtonActions>
+                            <Button
+                                buttonType="cancel"
+                                buttonText="Cancel"
+                                clickHandler={handleCancel}
+                            />
+                        </ButtonActions>
+                    </div>
+                : 
+                    <div className="flex justify-end">
+                        <ButtonActions>
+                                <Button
+                                    buttonType="edit"
+                                    buttonText="Edit"
+                                    clickHandler={handleEditingStateChange}
+                                />
+                        </ButtonActions>
+                    </div>
             }
 
             <div className="flex justify-center items-center">

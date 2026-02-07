@@ -10,15 +10,8 @@ export default function Home() {
           <Header></Header>
           <Section
             title={"Experience"}
-          >
-            <div></div>
-          </Section>
-
-          <Section
-            title={"Education"}
-          >
-            <div></div>
-          </Section>
+            type={"experience"}
+          />
         </CVPage>
       </main>
     </div>

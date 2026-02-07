@@ -73,6 +73,26 @@ export default function Button(
                             </div>
                         </button>
                     );
+                case "addExperience":
+                    return (
+                        <button
+                            className="bg-transparent flex grow gap-2 rounded-sm px-[12px] py-[4px] hover:font-semibold cursor-pointer"
+                            onClick={clickHandler}
+                        >
+                            <Image
+                                className="[filter:brightness(0)_saturate(100%)_invert(23%)_sepia(97%)_saturate(4185%)_hue-rotate(213deg)_brightness(102%)_contrast(101%)]"
+                                alt="pencil outline icon"
+                                src="/plus.svg"
+                                width={15}
+                                height={15}
+                            />
+                            <div
+                                className="text-blue-600 text-sm"
+                            >
+                                {buttonText}
+                            </div>
+                        </button>
+                    )
             }
         } 
 }

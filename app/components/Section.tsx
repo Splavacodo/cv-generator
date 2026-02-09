@@ -20,13 +20,33 @@ export default function Section({ title, type }: { title: string, type: string})
 
                         <ButtonActions>
                             <Button
-                                buttonType="addExperience"
+                                buttonType="addContent"
                                 buttonText="Add experience"
                                 clickHandler={() => {}}
                             />
                         </ButtonActions>
-                </section>
-            );
+                    </section>
+                );
+            case "education":
+                return (
+                    <section className="px-16 mb-8">
+                        <h1 className="text-2xl font-normal border-b-1 border-black py-2 mb-2">
+                            {title}
+                        </h1>
+
+                        <SectionContentList>
+                            <div></div>
+                        </SectionContentList>
+
+                        <ButtonActions>
+                            <Button
+                                buttonType="addContent"
+                                buttonText="Add education"
+                                clickHandler={() => {}}
+                            />
+                        </ButtonActions>
+                    </section>
+                );
         }
     }
 }

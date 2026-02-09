@@ -73,7 +73,7 @@ export default function Button(
                             </div>
                         </button>
                     );
-                case "addExperience":
+                case "addContent":
                     return (
                         <button
                             className="bg-transparent flex grow gap-2 rounded-sm px-[12px] py-[4px] hover:font-semibold cursor-pointer"
@@ -92,7 +92,7 @@ export default function Button(
                                 {buttonText}
                             </div>
                         </button>
-                    )
+                    );
             }
         } 
 }

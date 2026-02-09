@@ -12,6 +12,11 @@ export default function Home() {
             title={"Experience"}
             type={"experience"}
           />
+
+          <Section 
+            title={"Education"}
+            type={"education"}
+          />
         </CVPage>
       </main>
     </div>

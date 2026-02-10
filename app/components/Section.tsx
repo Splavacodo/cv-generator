@@ -1,10 +1,16 @@
 "use client";
 
+import { useState } from "react";
+
 import Button from "./Button";
 import ButtonActions from "./ButtonActions";
 import SectionContentList from "./SectionContentList";
 
 export default function Section({ title, type }: { title: string, type: string}) {
+    const [isAdding, setAdding] = useState(false);
+
+    function toggleIsAdding() { setAdding(!isAdding); }
+
     {
         switch(type) {
             case "experience":
@@ -18,13 +24,36 @@ export default function Section({ title, type }: { title: string, type: string})
                             <div></div>
                         </SectionContentList>
 
-                        <ButtonActions>
-                            <Button
-                                buttonType="addContent"
-                                buttonText="Add experience"
-                                clickHandler={() => {}}
-                            />
-                        </ButtonActions>
+                        {/* {isAdding && (
+                            <div className="flex flex-col">
+                                <div>yo</div>
+                            </div>
+                        )} */}
+
+                        {
+                            !isAdding ? 
+                                <ButtonActions>
+                                    <Button
+                                        buttonType="addContent"
+                                        buttonText="Add experience"
+                                        clickHandler={toggleIsAdding}
+                                    />
+                                </ButtonActions>
+                            :
+                              <ButtonActions>
+                                <Button
+                                    buttonType="save"
+                                    buttonText="Add"
+                                    clickHandler={toggleIsAdding}
+                                />
+
+                                <Button
+                                    buttonType="cancel"
+                                    buttonText="Cancel"
+                                    clickHandler={toggleIsAdding}
+                                />
+                              </ButtonActions>
+                        }
                     </section>
                 );
             case "education":

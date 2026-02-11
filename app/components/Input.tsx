@@ -1,6 +1,6 @@
 export default function Input(
     { inputId, inputType, inputPlaceholder, inputValue, onChangeHandler} : 
-    { inputId: string, inputType: string, inputPlaceholder: string, inputValue: string, onChangeHandler: () => void}) {
+    { inputId: string, inputType: string, inputPlaceholder: string, inputValue: string, onChangeHandler: (event: React.ChangeEvent<HTMLInputElement, Element>) => void}) {
 
         {
             if (inputType === "text") {

@@ -27,6 +27,34 @@ export default function Section({ title, type }: { title: string, type: string})
         });
     }
 
+    function handleDatesChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setExperience({
+            ...experience,
+            datesOfAttendence: event.target.value
+        });
+    }
+
+    function handleCompanyNameChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setExperience({
+            ...experience,
+            companyName: event.target.value
+        });
+    }
+
+    function handleJobLocationChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setExperience({
+            ...experience,
+            jobLocation: event.target.value
+        });
+    }
+
+    function handleJobDescriptionChange(event: React.ChangeEvent<HTMLTextAreaElement, HTMLTextAreaElement>) {
+        setExperience({
+            ...experience,
+            jobDescription: event.target.value
+        });
+    }
+
     {
         switch(type) {
             case "experience":
@@ -55,8 +83,8 @@ export default function Section({ title, type }: { title: string, type: string})
                                         inputId="dates-of-attendence"
                                         inputType="text"
                                         inputPlaceholder="Start date - End date"
-                                        onChangeHandler={() => {}}
-                                        inputValue=""
+                                        onChangeHandler={handleDatesChange}
+                                        inputValue={experience.datesOfAttendence}
                                     />
                                 </div>
 
@@ -65,16 +93,16 @@ export default function Section({ title, type }: { title: string, type: string})
                                         inputId="company-name"
                                         inputType="text"
                                         inputPlaceholder="Company name"
-                                        onChangeHandler={() => {}}
-                                        inputValue=""
+                                        onChangeHandler={handleCompanyNameChange}
+                                        inputValue={experience.companyName}
                                     />
 
                                     <Input 
                                         inputId="job-location"
                                         inputType="text"
                                         inputPlaceholder="Job location"
-                                        onChangeHandler={() => {}}
-                                        inputValue=""
+                                        onChangeHandler={handleJobLocationChange}
+                                        inputValue={experience.jobLocation}
                                     />
                                 </div>
 
@@ -84,6 +112,8 @@ export default function Section({ title, type }: { title: string, type: string})
                                     placeholder="Job description"
                                     className="border-2 border-solid border-gray-400 p-2 text-sm"
                                     rows={5}
+                                    onChange={handleJobDescriptionChange}
+                                    value={experience.jobDescription}
                                 />
                             </div>
                         )}

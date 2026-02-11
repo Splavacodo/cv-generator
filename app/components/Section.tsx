@@ -6,11 +6,13 @@ import Button from "./Button";
 import ButtonActions from "./ButtonActions";
 import SectionContentList from "./SectionContentList";
 import Input from "./Input";
+import Experience from "./Experience";
 
 export default function Section({ title, type }: { title: string, type: string}) {
     const [isAdding, setAdding] = useState(false);
+    const [contentList, setContentList] = useState<Array<Record<string, string>>>([]);
     const [experience, setExperience] = useState({
-        experienceId: "",
+        id: "",
         jobTitle: "",
         datesOfAttendence: "",
         companyName: "",
@@ -55,6 +57,48 @@ export default function Section({ title, type }: { title: string, type: string})
         });
     }
 
+    function handleAddExperience() {
+        toggleIsAdding();
+
+        const updatedExperience = {
+            ...experience,
+            id: crypto.randomUUID()
+        };
+
+        setExperience(updatedExperience);
+
+        setContentList([
+            ...contentList,
+            updatedExperience
+        ]);
+
+        const emptyExperience = {
+            id: "",
+            jobTitle: "",
+            datesOfAttendence: "",
+            companyName: "",
+            jobLocation: "",
+            jobDescription: ""
+        }
+
+        setExperience(emptyExperience);
+    }
+
+    function handleCancelExperience() {
+        toggleIsAdding();
+
+        const emptyExperience = {
+            id: "",
+            jobTitle: "",
+            datesOfAttendence: "",
+            companyName: "",
+            jobLocation: "",
+            jobDescription: ""
+        }
+
+        setExperience(emptyExperience);
+    }
+
     {
         switch(type) {
             case "experience":
@@ -64,10 +108,19 @@ export default function Section({ title, type }: { title: string, type: string})
                             {title}
                         </h1>
 
-                        <SectionContentList>
-                            <div></div>
-                        </SectionContentList>
-
+                        {
+                            contentList.length !== 0 && (
+                                 <SectionContentList>
+                                    {
+                                        contentList.map(experience => <Experience 
+                                            key={experience.id}
+                                            experience={experience}/>
+                                        )
+                                    }
+                                </SectionContentList>
+                            )
+                        }
+                       
                         {isAdding && (
                             <div className="flex flex-col pb-4 gap-2">
                                 <div className="flex justify-between">
@@ -132,13 +185,13 @@ export default function Section({ title, type }: { title: string, type: string})
                                 <Button
                                     buttonType="save"
                                     buttonText="Add"
-                                    clickHandler={toggleIsAdding}
+                                    clickHandler={handleAddExperience}
                                 />
 
                                 <Button
                                     buttonType="cancel"
                                     buttonText="Cancel"
-                                    clickHandler={toggleIsAdding}
+                                    clickHandler={handleCancelExperience}
                                 />
                               </ButtonActions>
                         }

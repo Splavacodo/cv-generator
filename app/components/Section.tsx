@@ -9,8 +9,23 @@ import Input from "./Input";
 
 export default function Section({ title, type }: { title: string, type: string}) {
     const [isAdding, setAdding] = useState(false);
+    const [experience, setExperience] = useState({
+        experienceId: "",
+        jobTitle: "",
+        datesOfAttendence: "",
+        companyName: "",
+        jobLocation: "",
+        jobDescription: ""
+    });
 
     function toggleIsAdding() { setAdding(!isAdding); }
+
+    function handleJobTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setExperience({
+            ...experience,
+            jobTitle: event.target.value
+        });
+    }
 
     {
         switch(type) {
@@ -32,8 +47,8 @@ export default function Section({ title, type }: { title: string, type: string})
                                         inputId="job-title"
                                         inputType="text"
                                         inputPlaceholder="Job title"
-                                        onChangeHandler={() => {}}
-                                        inputValue=""
+                                        onChangeHandler={handleJobTitleChange}
+                                        inputValue={experience.jobTitle}
                                     />
 
                                     <Input 

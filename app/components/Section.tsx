@@ -10,6 +10,7 @@ import Experience from "./Experience";
 
 export default function Section({ title, type }: { title: string, type: string}) {
     const [isAdding, setAdding] = useState(false);
+    const [editingIdx, setEditingIdx] = useState(-1); 
     const [contentList, setContentList] = useState<Array<Record<string, string>>>([]);
     const [experience, setExperience] = useState({
         id: "",
@@ -20,7 +21,10 @@ export default function Section({ title, type }: { title: string, type: string})
         jobDescription: ""
     });
 
-    function toggleIsAdding() { setAdding(!isAdding); }
+    function handleIsAddingStatus(addingStatus: boolean) { 
+        setEditingIdx(-1);
+        setAdding(addingStatus); 
+    }
 
     function handleJobTitleChange(event: React.ChangeEvent<HTMLInputElement>) {
         setExperience({
@@ -58,7 +62,7 @@ export default function Section({ title, type }: { title: string, type: string})
     }
 
     function handleAddExperience() {
-        toggleIsAdding();
+        handleIsAddingStatus(false);
 
         const updatedExperience = {
             ...experience,
@@ -85,7 +89,7 @@ export default function Section({ title, type }: { title: string, type: string})
     }
 
     function handleCancelExperience() {
-        toggleIsAdding();
+        handleIsAddingStatus(false);
 
         const emptyExperience = {
             id: "",
@@ -103,8 +107,8 @@ export default function Section({ title, type }: { title: string, type: string})
         switch(type) {
             case "experience":
                 return (
-                    <section className="px-16 mb-8">
-                        <h1 className="text-2xl font-normal border-b-1 border-black py-2 mb-2">
+                    <section className="flex flex-col gap-2 px-16 mb-8">
+                        <h1 className="text-2xl font-normal border-b-1 border-black py-2">
                             {title}
                         </h1>
 
@@ -112,9 +116,14 @@ export default function Section({ title, type }: { title: string, type: string})
                             contentList.length !== 0 && (
                                  <SectionContentList>
                                     {
-                                        contentList.map(experience => <Experience 
+                                        contentList.map((experience, idx) => <Experience 
                                             key={experience.id}
-                                            experience={experience}/>
+                                            experience={experience}
+                                            isEditing={idx === editingIdx}
+                                            onEdit={() => {
+                                                handleIsAddingStatus(false);
+                                                setEditingIdx(idx)}
+                                            }/>
                                         )
                                     }
                                 </SectionContentList>
@@ -177,7 +186,7 @@ export default function Section({ title, type }: { title: string, type: string})
                                     <Button
                                         buttonType="addContent"
                                         buttonText="Add experience"
-                                        clickHandler={toggleIsAdding}
+                                        clickHandler={() => handleIsAddingStatus(true)}
                                     />
                                 </ButtonActions>
                             :

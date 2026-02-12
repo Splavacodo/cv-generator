@@ -31,7 +31,7 @@ export default function Section({ title, type }: { title: string, type: string})
     function handleIsAddingStatus(addingStatus: boolean) { 
         setEditingIdx(-1);
         clearExperienceInputs();
-        // clearEducationInputs();
+        clearEducationInputs();
         setAdding(addingStatus); 
     }
 
@@ -138,7 +138,10 @@ export default function Section({ title, type }: { title: string, type: string})
 
     function handleCancelExperience() {
         handleIsAddingStatus(false);
-        clearExperienceInputs();
+    }
+
+    function handleCancelEducation() {
+        handleIsAddingStatus(false);
     }
 
     function clearExperienceInputs() {
@@ -154,17 +157,17 @@ export default function Section({ title, type }: { title: string, type: string})
         setExperience(emptyExperience);
     }
 
-    // function clearEducationInputs() {
-    //     const emptyEducation = {
-    //         id: "",
-    //         schoolName: "",
-    //         schoolLocation: "",
-    //         degreeType: "",
-    //         datesOfAttendence: ""
-    //     }
+    function clearEducationInputs() {
+        const emptyEducation = {
+            id: "",
+            schoolName: "",
+            schoolLocation: "",
+            degreeType: "",
+            datesOfAttendence: ""
+        }
 
-    //     setEducation(emptyEducation);
-    // }
+        setEducation(emptyEducation);
+    }
 
     {
         switch(type) {
@@ -358,7 +361,7 @@ export default function Section({ title, type }: { title: string, type: string})
                                     <Button
                                         buttonType="cancel"
                                         buttonText="Cancel"
-                                        clickHandler={() => handleIsAddingStatus(false)}
+                                        clickHandler={handleCancelEducation}
                                     />
                                 </ButtonActions>
                         }

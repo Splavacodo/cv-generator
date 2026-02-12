@@ -20,10 +20,18 @@ export default function Section({ title, type }: { title: string, type: string})
         jobLocation: "",
         jobDescription: ""
     });
+    const [education, setEducation] = useState({
+        id: "",
+        schoolName: "",
+        schoolLocation: "",
+        degreeType: "",
+        datesOfAttendence: ""
+    })
 
     function handleIsAddingStatus(addingStatus: boolean) { 
         setEditingIdx(-1);
         clearExperienceInputs();
+        // clearEducationInputs();
         setAdding(addingStatus); 
     }
 
@@ -59,6 +67,34 @@ export default function Section({ title, type }: { title: string, type: string})
         setExperience({
             ...experience,
             jobDescription: event.target.value
+        });
+    }
+
+    function handleSchoolNameChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setEducation({
+            ...education,
+            schoolName: event.target.value
+        });
+    }
+
+    function handleSchoolLocationChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setEducation({
+            ...education,
+            schoolLocation: event.target.value
+        });
+    }
+
+    function handleDegreeTypeChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setEducation({
+            ...education,
+            degreeType: event.target.value
+        });
+    }
+
+    function handleSchoolAttendenceDatesChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setEducation({
+            ...education,
+            datesOfAttendence: event.target.value
         });
     }
 
@@ -117,6 +153,18 @@ export default function Section({ title, type }: { title: string, type: string})
 
         setExperience(emptyExperience);
     }
+
+    // function clearEducationInputs() {
+    //     const emptyEducation = {
+    //         id: "",
+    //         schoolName: "",
+    //         schoolLocation: "",
+    //         degreeType: "",
+    //         datesOfAttendence: ""
+    //     }
+
+    //     setEducation(emptyEducation);
+    // }
 
     {
         switch(type) {
@@ -249,6 +297,46 @@ export default function Section({ title, type }: { title: string, type: string})
                         <SectionContentList>
                             <div></div>
                         </SectionContentList>
+
+                        {isAdding && (
+                            <div className="flex flex-col pb-4 gap-2">
+                                <div className="flex justify-between">
+                                    <Input 
+                                        inputId="school-name"
+                                        inputType="text"
+                                        inputPlaceholder="School name"
+                                        onChangeHandler={handleSchoolNameChange}
+                                        inputValue={education.schoolName}
+                                    />
+
+                                    <Input 
+                                        inputId="school-location"
+                                        inputType="text"
+                                        inputPlaceholder="Location"
+                                        onChangeHandler={handleSchoolLocationChange}
+                                        inputValue={education.schoolLocation}
+                                    />
+                                </div>
+
+                                <div className="flex justify-between">
+                                    <Input 
+                                        inputId="degree-type"
+                                        inputType="text"
+                                        inputPlaceholder="Degree type"
+                                        onChangeHandler={handleDegreeTypeChange}
+                                        inputValue={education.degreeType}
+                                    />
+
+                                    <Input 
+                                        inputId="dates-of-attendence"
+                                        inputType="text"
+                                        inputPlaceholder="Start date - End date"
+                                        onChangeHandler={handleSchoolAttendenceDatesChange}
+                                        inputValue={education.datesOfAttendence}
+                                    />
+                                </div>
+                            </div>
+                        )}
 
                         {
                             !isAdding ?

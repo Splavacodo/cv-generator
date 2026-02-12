@@ -76,21 +76,30 @@ export default function Section({ title, type }: { title: string, type: string})
             updatedExperience
         ]);
 
-        const emptyExperience = {
-            id: "",
-            jobTitle: "",
-            datesOfAttendence: "",
-            companyName: "",
-            jobLocation: "",
-            jobDescription: ""
-        }
+        clearExperienceInputs();
+    }
 
-        setExperience(emptyExperience);
+    function handleSaveEditExperience() {
+        setEditingIdx(-1);
+
+        setContentList(
+            contentList.map(experienceObj => {
+                if (experienceObj.id === experience.id)
+                    return {...experience}
+                else
+                    return experienceObj;
+            })
+        );
+
+        clearExperienceInputs();
     }
 
     function handleCancelExperience() {
         handleIsAddingStatus(false);
+        clearExperienceInputs();
+    }
 
+    function clearExperienceInputs() {
         const emptyExperience = {
             id: "",
             jobTitle: "",
@@ -116,14 +125,31 @@ export default function Section({ title, type }: { title: string, type: string})
                             contentList.length !== 0 && (
                                  <SectionContentList>
                                     {
-                                        contentList.map((experience, idx) => <Experience 
-                                            key={experience.id}
-                                            experience={experience}
-                                            isEditing={idx === editingIdx}
-                                            onEdit={() => {
-                                                handleIsAddingStatus(false);
-                                                setEditingIdx(idx)}
-                                            }/>
+                                        contentList.map((experienceObj, idx) => <Experience 
+                                                key={experienceObj.id}
+                                                experience={experienceObj}
+                                                experienceState={experience}
+                                                isEditing={idx === editingIdx}
+                                                onEdit={() => {
+                                                    const temp = {
+                                                        id: experienceObj.id,
+                                                        jobTitle: experienceObj.jobTitle,
+                                                        datesOfAttendence: experienceObj.datesOfAttendence,
+                                                        companyName: experienceObj.companyName,
+                                                        jobLocation: experienceObj.jobLocation,
+                                                        jobDescription: experienceObj.jobDescription
+                                                    }
+                                                    setExperience(temp);
+                                                    handleIsAddingStatus(false);
+                                                    setEditingIdx(idx)}
+                                                }
+                                                onSave={handleSaveEditExperience}
+                                                jobTitleHandler={handleJobTitleChange}
+                                                jobDatesHandler={handleDatesChange}
+                                                companyNameHandler={handleCompanyNameChange}
+                                                locationHandler={handleJobLocationChange}
+                                                descriptionHandler={handleJobDescriptionChange}
+                                            />
                                         )
                                     }
                                 </SectionContentList>

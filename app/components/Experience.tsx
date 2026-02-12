@@ -1,7 +1,20 @@
 import ButtonActions from "./ButtonActions";
 import Button from "./Button";
+import Input from "./Input";
 
-export default function Experience({ experience, isEditing, onEdit }: { experience: Record<string, string>, isEditing: boolean, onEdit: () => void}) {
+export default function Experience({ experience, experienceState, isEditing, onEdit, onSave, jobTitleHandler, jobDatesHandler, companyNameHandler, locationHandler, descriptionHandler }: 
+    { 
+        experience: Record<string, string>, 
+        experienceState: Record<string, string>,
+        isEditing: boolean, 
+        onEdit: () => void,
+        onSave: () => void,
+        jobTitleHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
+        jobDatesHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
+        companyNameHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
+        locationHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
+        descriptionHandler: (event: React.ChangeEvent<HTMLTextAreaElement, HTMLTextAreaElement>) => void
+    }) {
     return (
         !isEditing ?
             <li key={experience.id}>
@@ -40,6 +53,60 @@ export default function Experience({ experience, isEditing, onEdit }: { experien
                 </ButtonActions>
             </li>
         : 
-            <div>yo</div>
+            <div className="flex flex-col pb-4 gap-2">
+                <div className="flex justify-between">
+                    <Input 
+                        inputId="job-title"
+                        inputType="text"
+                        inputPlaceholder="Job title"
+                        onChangeHandler={jobTitleHandler}
+                        inputValue={experienceState.jobTitle}
+                    />
+
+                    <Input 
+                        inputId="dates-of-attendence"
+                        inputType="text"
+                        inputPlaceholder="Start date - End date"
+                        onChangeHandler={jobDatesHandler}
+                        inputValue={experienceState.datesOfAttendence}
+                    />
+                </div>
+
+                <div className="flex justify-between">
+                    <Input 
+                        inputId="company-name"
+                        inputType="text"
+                        inputPlaceholder="Company name"
+                        onChangeHandler={companyNameHandler}
+                        inputValue={experienceState.companyName}
+                    />
+
+                    <Input 
+                        inputId="job-location"
+                        inputType="text"
+                        inputPlaceholder="Job location"
+                        onChangeHandler={locationHandler}
+                        inputValue={experienceState.jobLocation}
+                    />
+                </div>
+
+                <textarea 
+                    name="job-description" 
+                    id="job-description" 
+                    placeholder="Job description"
+                    className="border-2 border-solid border-gray-400 p-2 text-sm"
+                    rows={5}
+                    onChange={descriptionHandler}
+                    value={experienceState.jobDescription}
+                />
+
+                <ButtonActions>
+                    <Button 
+                        buttonType="save"
+                        buttonText="Save"
+                        clickHandler={onSave}                
+                    />
+                </ButtonActions>
+            </div>
     );
 }

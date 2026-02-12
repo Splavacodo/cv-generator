@@ -23,6 +23,7 @@ export default function Section({ title, type }: { title: string, type: string})
 
     function handleIsAddingStatus(addingStatus: boolean) { 
         setEditingIdx(-1);
+        clearExperienceInputs();
         setAdding(addingStatus); 
     }
 
@@ -94,6 +95,11 @@ export default function Section({ title, type }: { title: string, type: string})
         clearExperienceInputs();
     }
 
+    function handleCancelEditExperience() {
+        setEditingIdx(-1);
+        clearExperienceInputs();
+    }
+
     function handleCancelExperience() {
         handleIsAddingStatus(false);
         clearExperienceInputs();
@@ -139,11 +145,12 @@ export default function Section({ title, type }: { title: string, type: string})
                                                         jobLocation: experienceObj.jobLocation,
                                                         jobDescription: experienceObj.jobDescription
                                                     }
-                                                    setExperience(temp);
                                                     handleIsAddingStatus(false);
+                                                    setExperience(temp);
                                                     setEditingIdx(idx)}
                                                 }
                                                 onSave={handleSaveEditExperience}
+                                                onCancel={handleCancelEditExperience}
                                                 jobTitleHandler={handleJobTitleChange}
                                                 jobDatesHandler={handleDatesChange}
                                                 companyNameHandler={handleCompanyNameChange}

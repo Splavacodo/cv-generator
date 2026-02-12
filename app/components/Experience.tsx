@@ -2,13 +2,14 @@ import ButtonActions from "./ButtonActions";
 import Button from "./Button";
 import Input from "./Input";
 
-export default function Experience({ experience, experienceState, isEditing, onEdit, onSave, jobTitleHandler, jobDatesHandler, companyNameHandler, locationHandler, descriptionHandler }: 
+export default function Experience({ experience, experienceState, isEditing, onEdit, onSave, onCancel, jobTitleHandler, jobDatesHandler, companyNameHandler, locationHandler, descriptionHandler }: 
     { 
         experience: Record<string, string>, 
         experienceState: Record<string, string>,
         isEditing: boolean, 
         onEdit: () => void,
         onSave: () => void,
+        onCancel: () => void,
         jobTitleHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
         jobDatesHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
         companyNameHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -105,6 +106,12 @@ export default function Experience({ experience, experienceState, isEditing, onE
                         buttonType="save"
                         buttonText="Save"
                         clickHandler={onSave}                
+                    />
+
+                    <Button
+                        buttonType="cancel"
+                        buttonText="Cancel"
+                        clickHandler={onCancel}
                     />
                 </ButtonActions>
             </div>

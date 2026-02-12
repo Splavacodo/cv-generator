@@ -250,13 +250,31 @@ export default function Section({ title, type }: { title: string, type: string})
                             <div></div>
                         </SectionContentList>
 
-                        <ButtonActions>
-                            <Button
-                                buttonType="addContent"
-                                buttonText="Add education"
-                                clickHandler={() => {}}
-                            />
-                        </ButtonActions>
+                        {
+                            !isAdding ?
+                                <ButtonActions>
+                                    <Button
+                                        buttonType="addContent"
+                                        buttonText="Add education"
+                                        clickHandler={() => handleIsAddingStatus(true)}
+                                    />
+                                </ButtonActions>
+                            :
+                                <ButtonActions>
+                                    <Button
+                                        buttonType="save"
+                                        buttonText="Add"
+                                        clickHandler={() => handleIsAddingStatus(false)}
+                                    />
+
+                                    <Button
+                                        buttonType="cancel"
+                                        buttonText="Cancel"
+                                        clickHandler={() => handleIsAddingStatus(false)}
+                                    />
+                                </ButtonActions>
+                        }
+                        
                     </section>
                 );
         }

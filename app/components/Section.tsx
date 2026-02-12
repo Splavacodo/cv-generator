@@ -7,6 +7,7 @@ import ButtonActions from "./ButtonActions";
 import SectionContentList from "./SectionContentList";
 import Input from "./Input";
 import Experience from "./Experience";
+import Education from "./Education";
 
 export default function Section({ title, type }: { title: string, type: string}) {
     const [isAdding, setAdding] = useState(false);
@@ -99,8 +100,6 @@ export default function Section({ title, type }: { title: string, type: string})
     }
 
     function handleAddExperience() {
-        handleIsAddingStatus(false);
-
         const updatedExperience = {
             ...experience,
             id: crypto.randomUUID()
@@ -113,7 +112,23 @@ export default function Section({ title, type }: { title: string, type: string})
             updatedExperience
         ]);
 
-        clearExperienceInputs();
+        handleIsAddingStatus(false);
+    }
+
+    function handleAddEducation() {
+        const updatedEducation = {
+            ...education,
+            id: crypto.randomUUID()
+        }
+
+        setEducation(updatedEducation);
+
+        setContentList([
+            ...contentList,
+            updatedEducation
+        ]);
+
+        handleIsAddingStatus(false); 
     }
 
     function handleSaveEditExperience() {
@@ -297,9 +312,39 @@ export default function Section({ title, type }: { title: string, type: string})
                             {title}
                         </h1>
 
-                        <SectionContentList>
-                            <div></div>
-                        </SectionContentList>
+                        {
+                            contentList.length !== 0 && (
+                                 <SectionContentList>
+                                    {
+                                        contentList.map((educationObj, idx) => <Education 
+                                                key={educationObj.id}
+                                                education={educationObj}
+                                                educationState={education}
+                                                isEditing={idx === editingIdx}
+                                                onEdit={() => {
+                                                    const temp = {
+                                                        id: educationObj.id,
+                                                        schoolName: educationObj.schoolName,
+                                                        schoolLocation: educationObj.schoolLocation,
+                                                        degreeType: educationObj.degreeType,
+                                                        datesOfAttendence: educationObj.datesOfAttendence
+                                                    }
+                                                    handleIsAddingStatus(false);
+                                                    setEducation(temp);
+                                                    setEditingIdx(idx)}
+                                                }
+                                                onSave={() => {}}
+                                                onCancel={() => {}}
+                                                schoolNameHandler={handleSchoolNameChange}
+                                                locationHandler={handleSchoolLocationChange}
+                                                degreeTypeHandler={handleDegreeTypeChange}
+                                                schoolDatesHandler={handleSchoolAttendenceDatesChange}
+                                            />
+                                        )
+                                    }
+                                </SectionContentList>
+                            )
+                        }
 
                         {isAdding && (
                             <div className="flex flex-col pb-4 gap-2">
@@ -355,7 +400,7 @@ export default function Section({ title, type }: { title: string, type: string})
                                     <Button
                                         buttonType="save"
                                         buttonText="Add"
-                                        clickHandler={() => handleIsAddingStatus(false)}
+                                        clickHandler={handleAddEducation}
                                     />
 
                                     <Button

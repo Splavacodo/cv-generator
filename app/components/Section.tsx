@@ -146,9 +146,27 @@ export default function Section({ title, type }: { title: string, type: string})
         clearExperienceInputs();
     }
 
+    function handleSaveEditEducation() {
+        setEditingIdx(-1);
+
+        setContentList(
+            contentList.map(educationObj => {
+                if (educationObj.id === education.id)
+                    return {...education}
+                else
+                    return educationObj;
+            })
+        )
+    }
+
     function handleCancelEditExperience() {
         setEditingIdx(-1);
         clearExperienceInputs();
+    }
+
+    function handleCancelEditEducation() {
+        setEditingIdx(-1);
+        clearEducationInputs();
     }
 
     function handleCancelExperience() {
@@ -333,8 +351,8 @@ export default function Section({ title, type }: { title: string, type: string})
                                                     setEducation(temp);
                                                     setEditingIdx(idx)}
                                                 }
-                                                onSave={() => {}}
-                                                onCancel={() => {}}
+                                                onSave={handleSaveEditEducation}
+                                                onCancel={handleCancelEditEducation}
                                                 schoolNameHandler={handleSchoolNameChange}
                                                 locationHandler={handleSchoolLocationChange}
                                                 degreeTypeHandler={handleDegreeTypeChange}

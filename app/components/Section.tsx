@@ -206,7 +206,7 @@ export default function Section({ title, type }: { title: string, type: string})
         switch(type) {
             case "experience":
                 return (
-                    <section className="flex flex-col gap-2 px-16 mb-8">
+                    <section className="flex flex-col gap-2 px-16 mb-2">
                         <h1 className="text-2xl font-normal border-b-1 border-black py-2">
                             {title}
                         </h1>
@@ -325,7 +325,7 @@ export default function Section({ title, type }: { title: string, type: string})
                 );
             case "education":
                 return (
-                    <section className="px-16 mb-8">
+                    <section className="flex flex-col gap-2 px-16 mb-8">
                         <h1 className="text-2xl font-normal border-b-1 border-black py-2 mb-2">
                             {title}
                         </h1>

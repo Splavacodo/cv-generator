@@ -20,7 +20,7 @@ export default function Education({ education, educationState, isEditing, onEdit
             <li key={education.id}>
                 <div className="flex flex-col pb-4 gap-2">
                     <div className="flex justify-between">
-                        <div className="text-sm">
+                        <div className="text-base font-semibold">
                             {education.schoolName}
                         </div>
 
@@ -30,13 +30,13 @@ export default function Education({ education, educationState, isEditing, onEdit
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="text-sm">
+                        <i className="text-sm">
                             {education.degreeType}
-                        </div>
+                        </i>
 
-                        <div className="text-sm">
+                        <i className="text-sm">
                             {education.datesOfAttendence}
-                        </div>
+                        </i>
                     </div>
                 </div>
 

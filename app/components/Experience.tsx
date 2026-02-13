@@ -19,9 +19,9 @@ export default function Experience({ experience, experienceState, isEditing, onE
     return (
         !isEditing ?
             <li key={experience.id}>
-                <div className="flex flex-col pb-4 gap-2">
+                <div className="flex flex-col pb-4 gap-1">
                     <div className="flex justify-between">
-                        <div className="text-sm">
+                        <div className="text-base font-semibold">
                             {experience.jobTitle}
                         </div>
 
@@ -31,13 +31,13 @@ export default function Experience({ experience, experienceState, isEditing, onE
                     </div>
 
                     <div className="flex justify-between">
-                        <div className="text-sm">
+                        <i className="text-sm">
                             {experience.companyName}
-                        </div>
+                        </i>
 
-                        <div className="text-sm">
+                        <i className="text-sm">
                             {experience.jobLocation}
-                        </div>
+                        </i>
                     </div>
 
                     <div className="pl-2 text-sm whitespace-pre-wrap">
